@@ -2,32 +2,6 @@
 
 A scalable notification orchestrator API built with .NET 10, Clean Architecture, and Domain-Driven Design (DDD).
 
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        Notification API                          │
-│                        (Orchestrator)                            │
-├─────────────────────────────────────────────────────────────────┤
-│  WebAPI          │  Application      │  Infrastructure          │
-│  - Controllers   │  - Commands       │  - EF Core               │
-│  - Middleware    │  - Queries        │  - Repositories          │
-│  - DTOs          │  - Validators     │  - Message Publishers    │
-└────────┬────────────────────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Message Queue  │  (RabbitMQ / Azure Service Bus)
-├─────────────────┤
-│ notifications.  │
-│   email    ────────► Email Microservice (separate project)
-│   sms      ────────► SMS Microservice (separate project)
-│   push     ────────► Push Microservice (separate project)
-│   webhook  ────────► Webhook Microservice (separate project)
-│   inapp    ────────► InApp Microservice (separate project)
-└─────────────────┘
-```
-
 ## Project Structure
 
 ```
@@ -68,13 +42,6 @@ NotificationAPI/
 - .NET 10 SDK
 - SQL Server (optional - uses InMemory by default)
 - RabbitMQ or Azure Service Bus (optional - uses InMemory by default)
-
-### Run the API
-
-```bash
-cd src/Notification.WebAPI
-dotnet run
-```
 
 ### Access
 
