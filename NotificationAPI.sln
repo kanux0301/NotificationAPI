@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{C33666
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C72BF971-2048-4904-A138-0BCC1974F233}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructor", "Infrastructor", "{F472FC94-829F-493F-9408-C18C4944D521}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F472FC94-829F-493F-9408-C18C4944D521}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{263210E3-6F11-4B02-8431-D0DEEDB2ADBC}"
 EndProject
@@ -22,13 +22,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.WebAPI", "test\Notification.WebAPI\Notification.WebAPI.csproj", "{EBE392D3-115B-44A7-8EF1-4C11361FAF3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notificaiton.WebAPI", "src\Notification.WebAPI\Notificaiton.WebAPI.csproj", "{A81762B6-9E8F-D946-0832-C60794FF281C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.WebAPI", "src\Notification.WebAPI\Notification.WebAPI.csproj", "{A81762B6-9E8F-D946-0832-C60794FF281C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Application", "src\Notification.Application\Notification.Application.csproj", "{9DB0DA90-DA8F-33D2-73C7-07A85A9F095A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Domain", "src\Notification.Domain\Notification.Domain.csproj", "{0F752625-37CF-A6C2-020F-63F9F8EFD387}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Infrastructor", "src\Notification.Infrastructor\Notification.Infrastructor.csproj", "{6171DE7A-8918-BB00-F24F-6B916C665B46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Infrastructure", "src\Notification.Infrastructor\Notification.Infrastructor.csproj", "{6171DE7A-8918-BB00-F24F-6B916C665B46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

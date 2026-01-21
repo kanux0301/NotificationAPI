@@ -1,0 +1,112 @@
+trigger:
+  branches:
+    include:
+      - master
+      - main
+      - develop
+  paths:
+    exclude:
+      - '**/*.md'
+      - '.gitignore'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  dotnetVersion: '10.0.x'
+
+stages:
+  - stage: Build
+    displayName: 'Build and Test'
+    jobs:
+      - job: Build
+        displayName: 'Build Solution'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Install .NET SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '$(dotnetVersion)'
+              includePreviewVersions: true
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore NuGet packages'
+            inputs:
+              command: 'restore'
+              projects: '**/*.csproj'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Build solution'
+            inputs:
+              command: 'build'
+              projects: '**/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-restore'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Run tests'
+            inputs:
+              command: 'test'
+              projects: '**/test/**/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-build --verbosity normal'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Publish WebAPI'
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/webapp'
+              zipAfterPublish: true
+
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish artifacts'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
+  - stage: Deploy_Dev
+    displayName: 'Deploy to Development'
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    jobs:
+      - deployment: Deploy
+        displayName: 'Deploy to Dev Environment'
+        environment: 'development'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadBuildArtifacts@1
+                  inputs:
+                    buildType: 'current'
+                    downloadType: 'single'
+                    artifactName: 'drop'
+                    downloadPath: '$(System.ArtifactsDirectory)'
+
+                # TODO: Add deployment steps here (Azure App Service, Docker, etc.)
+                - script: echo 'Deploying to Development environment...'
+                  displayName: 'Deploy placeholder'
+
+  - stage: Deploy_Prod
+    displayName: 'Deploy to Production'
+    dependsOn: Build
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main')))
+    jobs:
+      - deployment: Deploy
+        displayName: 'Deploy to Production Environment'
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadBuildArtifacts@1
+                  inputs:
+                    buildType: 'current'
+                    downloadType: 'single'
+                    artifactName: 'drop'
+                    downloadPath: '$(System.ArtifactsDirectory)'
+
+                # TODO: Add deployment steps here (Azure App Service, Docker, etc.)
+                - script: echo 'Deploying to Production environment...'
+                  displayName: 'Deploy placeholder'
