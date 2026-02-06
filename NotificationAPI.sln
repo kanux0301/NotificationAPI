@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Domain", "src\Notification.Domain\Notification.Domain.csproj", "{0F752625-37CF-A6C2-020F-63F9F8EFD387}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Infrastructure", "src\Notification.Infrastructor\Notification.Infrastructor.csproj", "{6171DE7A-8918-BB00-F24F-6B916C665B46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Infrastructure", "src\Notification.Infrastructure\Notification.Infrastructure.csproj", "{6171DE7A-8918-BB00-F24F-6B916C665B46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
